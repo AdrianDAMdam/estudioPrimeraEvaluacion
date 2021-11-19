@@ -7,98 +7,86 @@ namespace estudio
     class Program
     {
 
-        static int PideFallos()
+        static void PresentacionDeJuego()
         {
-            System.Console.Write("Introduce el número máximo de fallos: ");
+            System.Console.WriteLine("1. El programa pedirá que introduzcas el número de participantes a jugar.\n2. Cada participante tirará 3 veces un dado con valores entre 1 y 100 (electrónico se entiende),sumándose el valor de las 3 jugadas. Ganará el participante que obtenga mayor puntuación según las siguientes reglas:◦ Si el nº obtenido es múltiplo de 3 o de 5 sumara 10 pts.◦ Si el nº obtenido es múltiplo de 4 o de 6 sumara 5 pts.◦ Si el nº obtenido es mayor de 80 sumara 2 pts.◦ Si el nº obtenido es mayor de 50 sumar 1 pts.◦ Si el nº obtenido es menor de 50 restará 2 pts.◦ Si el nº obtenido es menor de 20 restará 1 pts.");
+        }
+
+        static int PideNumeroDeParticipanes()
+        {
+            System.Console.Write("Introduce numero de participantes");
             return int.Parse(Console.ReadLine());
         }
-        static string PidePalabraSecreta()
-        {
-            System.Console.Write("Introduce la palabra a adivinar: ");
-            return Console.ReadLine();
-        }
-        static void MuestraEstadoDeJuego(string palabraParcialmeteAcertada, ref string letrasFalladas)
-        {
 
-            System.Console.WriteLine("\nPalabra: " + palabraParcialmeteAcertada);
-            System.Console.WriteLine("Fallos: " + letrasFalladas);
+        static int TiradaDado()
+        {
+            Random tirada = new Random();
+            return tirada.Next(1, 101);
+        }
+        static int CalculaPuntos(int tirada)
+        {
+             int puntos = 0;
 
-        }
+                if (tirada % 3 == 0 || tirada % 5 == 0)
+                    puntos += 10;
+                if (tirada % 4 == 0 || tirada % 6 == 0)
+                    puntos += 5;
+                if (tirada > 50)
+                    puntos++;
+                if (tirada > 80)
+                    puntos += 2;
+                if (tirada < 50)
+                    puntos -= 2;
+                if (tirada < 20)
+                    puntos--;
 
-        static bool EstaLetraEnLetras(char letra, string letras)
-        {
-            return letras.Contains(letra);
+                
+            return puntos;
         }
-        static bool EstaLetraEnLetrasAcertadas(char letra, string palabraParcialmenteAcertada)
+        static int JuegoParticipante(int participante)
         {
-            return EstaLetraEnLetras(letra, palabraParcialmenteAcertada); ;
-        }
-        static bool EstaLetraEnletrasFalladas(char letra, ref string falladas)
-        {
-            return EstaLetraEnLetras(letra, falladas);
-        }
-        static bool EstaLetraEnLetrasIntroducidas(char letra, string palabraParcialmeteAcertada, ref string falladas)
-        {
-            //no se si devule ture o false
-            return EstaLetraEnletrasFalladas(letra, ref falladas) || EstaLetraEnLetrasAcertadas(letra, palabraParcialmeteAcertada);
-        }
-        static char PideLetraNoRepetida(string palabraParcialmeteAcertada, ref string falladas, string palabraSecreta)
-        {
-            char letra;
-            int i = 0;
+           
+            const int TIRADAS_POR_PARTIDA = 3;
+            int tirada;
+            int contadorTirada = 1;
+            int puntosJugada = 0;
             do
             {
-                System.Console.Write("Introduce una letra: ");
-                letra = Console.ReadKey().KeyChar;
-                if(palabraSecreta.IndexOf(letra)==-1)
-                falladas = falladas + letra;
-                i++;
-
-            } while (EstaLetraEnLetrasIntroducidas(letra, palabraParcialmeteAcertada, ref falladas));
-
-            return letra;
+                tirada = TiradaDado();
+                puntosJugada += tirada;
+                contadorTirada++;
+            } while (contadorTirada < TIRADAS_POR_PARTIDA);
+            puntosJugada = CalculaPuntos(puntosJugada);
+            return puntosJugada;
         }
-        static string AñadeLetrasALetrasAMostrar(char letra, string palabraSecreta, StringBuilder palabraParcialmeteAdivinada)
+
+        static void MejorPuntuacionJuego(int nuemeroParticipantes)
         {
-            for (int i = 0; i < palabraSecreta.Length; i++)
+            int mejorJugador = 0;
+            string texto = "";
+            int puntuacionGanador = int.MinValue;
+            int puntuacion = 0;
+            for (int participante = 0; participante < nuemeroParticipantes; participante++)
             {
-                if (palabraSecreta[i] == letra)
-                    palabraParcialmeteAdivinada[i] = palabraSecreta[i];
+                puntuacion = JuegoParticipante(participante);
+                if (puntuacion > puntuacionGanador)
+                {
+                    puntuacionGanador = puntuacion;
+                    mejorJugador = participante;
+                }
 
             }
-            return palabraParcialmeteAdivinada.ToString();
+            texto = $"Soy el jugadro {mejorJugador} y he ganado con {puntuacionGanador} puntos.";
+            System.Console.WriteLine("________________________________________________________");
+            System.Console.WriteLine(texto);
         }
-
-        static void Jugar(string palabraSecreta, int fallos)
+        static void Main()
         {
-            StringBuilder palabraParcialmenteAcertada = new StringBuilder(palabraSecreta);
-            for (int i = 0; i < palabraSecreta.Length; i++)
-            {
-                palabraParcialmenteAcertada[i] = '_';
-            }
-            
-            string palbraParcialmenteAcertada = "";
-            string falladas = "";
-            for (int i = 0; i < fallos && (palbraParcialmenteAcertada != palabraSecreta); i++)
-            {
-                char letra;
-                MuestraEstadoDeJuego(palabraParcialmenteAcertada.ToString(), ref falladas);
-                letra = PideLetraNoRepetida(palabraParcialmenteAcertada.ToString(), ref falladas,palabraSecreta);
-                palbraParcialmenteAcertada = AñadeLetrasALetrasAMostrar(letra, palabraSecreta, palabraParcialmenteAcertada);
-            }
-
-            MuestraEstadoDeJuego(palabraParcialmenteAcertada.ToString(), ref falladas);
-
-
+            PresentacionDeJuego();
+            int nuemeroParticipantes = PideNumeroDeParticipanes();
+            MejorPuntuacionJuego(nuemeroParticipantes);
         }
-        static void Main(string[] args)
-        {
-            string palabraSecreta = PidePalabraSecreta();
-            int fallos = PideFallos();
-            Jugar(palabraSecreta, fallos);
 
 
-
-        }
     }
 }
