@@ -1,0 +1,13 @@
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\bin\Debug\netcoreapp3.1\estudio.exe
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\bin\Debug\netcoreapp3.1\estudio.deps.json
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\bin\Debug\netcoreapp3.1\estudio.runtimeconfig.json
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\bin\Debug\netcoreapp3.1\estudio.runtimeconfig.dev.json
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\bin\Debug\netcoreapp3.1\estudio.dll
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\bin\Debug\netcoreapp3.1\estudio.pdb
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\obj\Debug\netcoreapp3.1\estudio.csprojAssemblyReference.cache
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\obj\Debug\netcoreapp3.1\estudio.AssemblyInfoInputs.cache
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\obj\Debug\netcoreapp3.1\estudio.AssemblyInfo.cs
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\obj\Debug\netcoreapp3.1\estudio.csproj.CoreCompileInputs.cache
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\obj\Debug\netcoreapp3.1\estudio.dll
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\obj\Debug\netcoreapp3.1\estudio.pdb
+C:\Users\adria\Desktop\DAM\aPROGRAMACION\estudio\estudio\obj\Debug\netcoreapp3.1\estudio.genruntimeconfig.cache
