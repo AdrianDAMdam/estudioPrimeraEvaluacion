@@ -60,15 +60,15 @@ namespace estudio
             return puntosJugada;
         }
 
-        static void MejorPuntuacionJuego(int nuemeroParticipantes)
+        static void CompruebaMejorPuntuacionJuego(int nuemeroParticipantes, int puntuacion)
         {
             int mejorJugador = 0;
             string texto = "";
             int puntuacionGanador = int.MinValue;
-            int puntuacion = 0;
+            //int puntuacion = 0;
             for (int participante = 0; participante < nuemeroParticipantes; participante++)
             {
-                puntuacion = JuegoParticipante(participante);
+                //puntuacion = JuegoParticipante(participante);
                 if (puntuacion > puntuacionGanador)
                 {
                     puntuacionGanador = puntuacion;
@@ -84,7 +84,8 @@ namespace estudio
         {
             PresentacionDeJuego();
             int nuemeroParticipantes = PideNumeroDeParticipanes();
-            MejorPuntuacionJuego(nuemeroParticipantes);
+            int puntuacion = JuegoParticipante(nuemeroParticipantes);
+            CompruebaMejorPuntuacionJuego(nuemeroParticipantes,puntuacion);
         }
 
 
